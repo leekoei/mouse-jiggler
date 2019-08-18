@@ -1,12 +1,14 @@
 # mouse-jiggler
 
-Mouse jiggler is a handy tool to emulator a mouse that moves all the time in certain pattern.
+Mouse jiggler is a handy tool to emulator a mouse that moves all the time in certain pattern. 
+
+Application? You know that...
 
 ## Compatible Arduino Boards
 
-32u4 and SAMD based boards (Leonardo, Esplora, Zero, Due and MKR Family)
+32u4 and SAMD based Arduino boards (Leonardo, Esplora, Zero, Due and MKR Family), or compatible third party boards.
 
-## TBD
+## Next Steps
 
 - Add more moving patterns
 - Get keyboard input from computer keyboard, without using serial console. The input can be used to turn ON/OFF jiggler movement and toggle pattern
