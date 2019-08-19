@@ -8,6 +8,10 @@ Application? You know that...
 
 32u4 and SAMD based Arduino boards (Leonardo, Esplora, Zero, Due and MKR Family), or compatible third party boards.
 
+Tested platform:
+- Arduino MKR Zero
+- Sparkfun ProMicro
+
 ## Next Steps
 
 - Add more moving patterns
