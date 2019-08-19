@@ -9,29 +9,31 @@
  * 
  * Ron Li
  * 2019.08
- *              ____
- *             /    \__
- * |\         /    @   \
- * \ \_______|    \  .:|>
- *  \      ##|    | \__/
- *   |    ####\__/   \
- *   /  /  ##       \|
- *  /  /__________\  \
- *  L_JJ           \__JJ
+ *                           ____
+ *                          /    \__
+ * |\                      /    @   \
+ * \ \____________________|    \  .:|>
+ *  \      ##             |    | \__/
+ *   |    ####             \__/   \
+ *   /  /  ##                    \|
+ *  /  /_______________________\  \
+ *  L_JJ                        \__JJ
  * 
  */
 #include "Mouse.h"
 
 /* Const definition */
-const int move_rect = 0;
-const int move_circle = 1;
-
-const int circle_approx_n = 50;
+enum move_pattern_t {
+  move_pattern_rect,
+  move_pattern_cirlce,
+  move_pattern_three_points,
+  NUM_OF_MOVE_PATTERN
+};
 
 /* Global variable definitions */
-int rect_len      = 15;
-int move_delay    = 5;
-int move_pattern  = move_circle;
+int move_step     = 30;
+int move_delay    = 10;
+int move_pattern  = move_pattern_cirlce;
 
 
 void setup() {
@@ -40,22 +42,40 @@ void setup() {
 }
 
 void loop() {
+//  if(Mouse.isPressed()) {
+//    move_pattern = (move_pattern + 1) % NUM_OF_MOVE_PATTERN; 
+//  }
   /* Rectangle movement */
-  if (move_pattern == move_rect) {
-    Mouse.move(0, rect_len, 0);
+  if (move_pattern == move_pattern_rect) {
+    Mouse.move(0, move_step, 0);
     delay(move_delay);
-    Mouse.move(rect_len, 0, 0);
+    Mouse.move(move_step, 0, 0);
     delay(move_delay);
-    Mouse.move(0, -rect_len, 0);
+    Mouse.move(0, -move_step, 0);
     delay(move_delay);
-    Mouse.move(-rect_len, 0, 0);
+    Mouse.move(-move_step, 0, 0);
     delay(move_delay);
   }
-  if (move_pattern == move_circle) {
+  /* Circle movement */
+  if (move_pattern == move_pattern_cirlce) {
+    int circle_approx_n = 40;
+    move_step = 10;
+    move_delay = 15;
+    
     for(int i = 0; i < circle_approx_n; i++) {
-      float x = rect_len * cos(2*3.14*(i + 1)/circle_approx_n);
-      float y = rect_len * sin(2*3.14*(i + 1)/circle_approx_n);
+      float x = move_step * cos(2*3.14*(i + 1)/circle_approx_n);
+      float y = move_step * sin(2*3.14*(i + 1)/circle_approx_n);
       Mouse.move(x, y, 0);
+      delay(move_delay);
+    }
+  }
+  /* Three point pattern */
+  if(move_pattern == move_pattern_three_points) {
+    move_step = -move_step;
+    move_delay = 70;
+    
+    for(int i = 0; i < 3; i++) {
+      Mouse.move(move_step, 0, 0);
       delay(move_delay);
     }
   }
